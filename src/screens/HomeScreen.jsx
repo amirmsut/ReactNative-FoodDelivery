@@ -1,12 +1,13 @@
 import React from "react";
-import { SafeAreaView, Text, View, TextInput } from "react-native";
+import { SafeAreaView, Text, View, TextInput, ScrollView } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import Carousel from "../components/Carousel";
 import FoodTypes from "../components/FoodTypes";
+import QuickFood from "../components/QuickFood";
 
 const HomeScreen = () => {
     return (
-        <SafeAreaView>
+        <ScrollView style={{ marginTop: 50 }}>
             {/* Search Bar */}
             <View
                 style={{
@@ -32,7 +33,10 @@ const HomeScreen = () => {
 
             {/* Food ItemTypes */}
             <FoodTypes />
-        </SafeAreaView>
+
+            {/* Quick Food Components */}
+            <QuickFood />
+        </ScrollView>
     );
 };
 export default HomeScreen;

@@ -32,7 +32,7 @@ const FoodTypes = () => {
     //
     return (
         <View>
-            <ScrollView horizontal showHorizontalScrollIndicator={false}>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                 {types.map((item, index) => (
                     <View style={{ margin: 10 }} key={index}>
                         <Image
