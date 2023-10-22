@@ -31,7 +31,7 @@ const FoodItem = ({ item }) => {
                         key={i}
                     >
                         <Text style={{ fontSize: 20, fontWeight: "bold" }}>
-                            {item.name}
+                            {item.name} ({item.items.length})
                         </Text>
                         <AntDesign name="down" size={24} color="black" />
                     </Pressable>
