@@ -1,6 +1,7 @@
 import React from "react";
-import { View, Text, SafeAreaView } from "react-native";
+import { View, Text, SafeAreaView, ScrollView } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
+import FoodItem from "../components/FoodItem";
 
 // Icons
 import { Ionicons } from "@expo/vector-icons";
@@ -13,7 +14,7 @@ const MenuScreen = () => {
     console.log(route.params);
     const navigation = useNavigation();
     return (
-        <SafeAreaView>
+        <ScrollView style={{ marginTop: 50 }}>
             <View
                 style={{
                     height: 300,
@@ -214,8 +215,20 @@ const MenuScreen = () => {
             >
                 Menu
             </Text>
-            <Text></Text>
-        </SafeAreaView>
+
+            {/*  */}
+            <Text
+                style={{
+                    borderColor: "gray",
+                    borderWidth: 0.6,
+                    height: 1,
+                    marginTop: 12,
+                }}
+            />
+            {route.params.menu.map((item, index) => (
+                <FoodItem item={item} key={index} />
+            ))}
+        </ScrollView>
     );
 };
 export default MenuScreen;
