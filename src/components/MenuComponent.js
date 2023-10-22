@@ -47,6 +47,35 @@ const MenuComponent = ({ food }) => {
                 </View>
 
                 {/*  */}
+                <Pressable style={{ marginRight: 10 }}>
+                    <Image
+                        style={{ width: 120, height: 120, borderRadius: 8 }}
+                        source={{ uri: food.image }}
+                    />
+                    <Pressable
+                        style={{
+                            position: "absolute",
+                            top: 90,
+                            left: 20,
+                            flexDirection: "row",
+                            paddingHorizontal: 25,
+                            paddingVertical: 10,
+                            alignItems: "center",
+                            backgroundColor: "white",
+                            borderRadius: 5,
+                        }}
+                    >
+                        <Text
+                            style={{
+                                fontSize: 18,
+                                fontWeight: "600",
+                                color: "#018749",
+                            }}
+                        >
+                            ADD
+                        </Text>
+                    </Pressable>
+                </Pressable>
             </Pressable>
         </View>
     );
