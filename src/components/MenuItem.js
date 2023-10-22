@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, ImageBackground, Pressable } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 // Icons
 import { AntDesign } from "@expo/vector-icons";
@@ -7,10 +8,27 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const MenuItem = ({ item }) => {
-    console.log(item);
+    const navigation = useNavigation();
+
     return (
         <View style={{ margin: 10 }}>
-            <Pressable style={{ flexDirection: "row" }}>
+            <Pressable
+                // onPress={() => console.warn("pressed1")}
+                onPress={() =>
+                    navigation.navigate("Menu", {
+                        id: item.id,
+                        name: item.name,
+                        image: item.image,
+                        rating: item.rating,
+                        time: item.time,
+                        address: item.address,
+                        cost_for_two: item.cost_for_two,
+                        cuisines: item.cuisines,
+                        menu: item.menu,
+                    })
+                }
+                style={{ flexDirection: "row" }}
+            >
                 <View style={{ position: "relative" }}>
                     <ImageBackground
                         source={{ uri: item.image }}

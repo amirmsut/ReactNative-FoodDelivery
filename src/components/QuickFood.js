@@ -64,7 +64,15 @@ const QuickFood = () => {
                                 size={24}
                                 color="green"
                             />
-                            <Text style={{ marginLeft: 3 }}>{item.rating}</Text>
+                            <Text
+                                style={{
+                                    marginLeft: 3,
+                                    fontSize: 15,
+                                    fontWeight: "400",
+                                }}
+                            >
+                                {item.rating}
+                            </Text>
                             <Text style={{ marginLeft: 3 }}>•</Text>
                             <Text
                                 style={{
