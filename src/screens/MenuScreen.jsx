@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, SafeAreaView, ScrollView, Pressable } from "react-native";
+import {
+    View,
+    Text,
+    SafeAreaView,
+    ScrollView,
+    Pressable,
+    Image,
+} from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import FoodItem from "../components/FoodItem";
 
@@ -17,6 +24,7 @@ const MenuScreen = () => {
     const navigation = useNavigation();
 
     const [menu, setMenu] = useState([]);
+    const [modalVisible, setModalVisible] = useState(false);
 
     useEffect(() => {
         const fetchMenu = () => {
@@ -24,6 +32,12 @@ const MenuScreen = () => {
         };
         fetchMenu();
     }, []);
+
+    // func.
+    const toggleModal = () => {
+        setModalVisible(!modalVisible);
+    };
+
     return (
         <>
             <ScrollView style={{ marginTop: 50 }}>
@@ -265,6 +279,7 @@ const MenuScreen = () => {
 
             {/*  */}
             <Pressable
+                onPress={toggleModal}
                 style={{
                     width: 60,
                     height: 60,
@@ -294,6 +309,67 @@ const MenuScreen = () => {
                     MENU
                 </Text>
             </Pressable>
+            <Modal isVisible={modalVisible} onBackdropPress={toggleModal}>
+                <View
+                    style={{
+                        height: 190,
+                        width: 250,
+                        backgroundColor: "black",
+                        position: "absolute",
+                        bottom: 35,
+                        right: 10,
+                        borderRadius: 7,
+                    }}
+                >
+                    {menu.map((item, index) => (
+                        <View
+                            style={{
+                                padding: 10,
+                                flexDirection: "row",
+                                alignItems: "center",
+                                justifyContent: "space-between",
+                            }}
+                            key={index}
+                        >
+                            <Text
+                                style={{
+                                    color: "#D0D0D0",
+                                    fontWeight: "600",
+                                    fontSize: 19,
+                                }}
+                            >
+                                {item.name}
+                            </Text>
+                            <Text
+                                style={{
+                                    color: "#D0D0D0",
+                                    fontWeight: "600",
+                                    fontSize: 19,
+                                }}
+                            >
+                                {item.items.length}
+                            </Text>
+                        </View>
+                    ))}
+                    <View
+                        style={{
+                            justifyContent: "center",
+                            alignItems: "center",
+                        }}
+                    >
+                        <Image
+                            style={{
+                                width: 120,
+                                height: 70,
+                                resizeMode: "contain",
+                            }}
+                            source={{
+                                uri: "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_284/Logo_f5xzza",
+                            }}
+                        />
+                    </View>
+                </View>
+            </Modal>
         </>
     );
 };
