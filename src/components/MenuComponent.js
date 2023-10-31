@@ -1,8 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, Pressable, Image } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
+import { useDispatch } from "react-redux";
+import {
+    addToCart,
+    decrementQuantity,
+    incrementQuantity,
+    removeFromCart,
+} from "../redux/CartReducer";
 
 const MenuComponent = ({ food }) => {
+    const dispatch = useDispatch();
+    const [addItems, setAddItems] = useState(0);
+    const [selected, setSelected] = useState(false);
+
     return (
         <View>
             <Pressable
@@ -52,29 +63,105 @@ const MenuComponent = ({ food }) => {
                         style={{ width: 120, height: 120, borderRadius: 8 }}
                         source={{ uri: food.image }}
                     />
-                    <Pressable
-                        style={{
-                            position: "absolute",
-                            top: 90,
-                            left: 20,
-                            flexDirection: "row",
-                            paddingHorizontal: 25,
-                            paddingVertical: 10,
-                            alignItems: "center",
-                            backgroundColor: "white",
-                            borderRadius: 5,
-                        }}
-                    >
-                        <Text
+                    {selected ? (
+                        <Pressable
                             style={{
-                                fontSize: 18,
-                                fontWeight: "600",
-                                color: "#018749",
+                                position: "absolute",
+                                top: 90,
+                                left: 15,
+
+                                flexDirection: "row",
+                                paddingHorizontal: 10,
+                                paddingVertical: 5,
+                                alignItems: "center",
+                                backgroundColor: "white",
+                                borderRadius: 5,
                             }}
                         >
-                            ADD
-                        </Text>
-                    </Pressable>
+                            <Pressable
+                                onPress={() => {
+                                    if (addItems === 1) {
+                                        dispatch(removeFromCart(food));
+                                        setSelected(false);
+                                        setAddItems(0);
+                                    } else {
+                                        setAddItems((c) => c - 1);
+                                        dispatch(decrementQuantity(food));
+                                    }
+                                }}
+                            >
+                                <Text
+                                    style={{
+                                        fontSize: 25,
+                                        color: "green",
+                                        paddingHorizontal: 6,
+                                    }}
+                                >
+                                    -
+                                </Text>
+                            </Pressable>
+
+                            <Pressable>
+                                <Text
+                                    style={{
+                                        fontSize: 20,
+                                        color: "green",
+                                        paddingHorizontal: 6,
+                                    }}
+                                >
+                                    {addItems}
+                                </Text>
+                            </Pressable>
+
+                            <Pressable
+                                onPress={() => {
+                                    setAddItems((c) => c + 1);
+                                    dispatch(incrementQuantity(food));
+                                }}
+                            >
+                                <Text
+                                    style={{
+                                        fontSize: 20,
+                                        color: "green",
+                                        paddingHorizontal: 6,
+                                    }}
+                                >
+                                    +
+                                </Text>
+                            </Pressable>
+                        </Pressable>
+                    ) : (
+                        <Pressable
+                            onPress={() => {
+                                setSelected(true);
+                                if (addItems == 0) {
+                                    setAddItems((c) => c + 1);
+                                }
+                                dispatch(addToCart(food));
+                            }}
+                            style={{
+                                position: "absolute",
+                                top: 90,
+                                left: 20,
+                                flexDirection: "row",
+                                paddingHorizontal: 25,
+                                paddingVertical: 10,
+                                alignItems: "center",
+                                backgroundColor: "white",
+                                borderRadius: 5,
+                            }}
+                        >
+                            <Text
+                                style={{
+                                    fontSize: 18,
+                                    fontWeight: "600",
+                                    color: "#018749",
+                                }}
+                            >
+                                ADD
+                            </Text>
+                        </Pressable>
+                    )}
                 </Pressable>
             </Pressable>
         </View>

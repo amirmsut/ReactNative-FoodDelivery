@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import FoodItem from "../components/FoodItem";
+import { useSelector } from "react-redux";
 
 import Modal from "react-native-modal";
 
@@ -19,10 +20,11 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 
 const MenuScreen = () => {
+    const cart = useSelector((state) => state.cart.cart);
+    // console.log(cart);
+    console.log(cart);
     const route = useRoute();
-    console.log(route.params);
     const navigation = useNavigation();
-
     const [menu, setMenu] = useState([]);
     const [modalVisible, setModalVisible] = useState(false);
 
