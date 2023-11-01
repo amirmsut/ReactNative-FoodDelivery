@@ -3,6 +3,7 @@ import {
     decrementQuantity,
     incrementQuantity,
     removeFromCart,
+    cleanCart,
 } from "../redux/CartReducer";
 import React from "react";
 import { ScrollView, View, Text, Pressable } from "react-native";
