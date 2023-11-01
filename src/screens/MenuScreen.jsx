@@ -21,7 +21,11 @@ import { FontAwesome5 } from "@expo/vector-icons";
 
 const MenuScreen = () => {
     const cart = useSelector((state) => state.cart.cart);
-    // console.log(cart);
+    const total = cart
+        .map((item) => item.price * item.quantity)
+        .reduce((curr, prev) => curr + prev, 0);
+
+    console.log(total);
     console.log(cart);
     const route = useRoute();
     const navigation = useNavigation();
@@ -372,6 +376,70 @@ const MenuScreen = () => {
                     </View>
                 </View>
             </Modal>
+            {total === 0 ? null : (
+                <Pressable
+                    style={{
+                        backgroundColor: "#00A877",
+                        width: "90%",
+                        padding: 13,
+                        marginLeft: "auto",
+                        marginRight: "auto",
+                        marginBottom: 30,
+                        position: "absolute",
+                        borderRadius: 8,
+                        left: 20,
+                        bottom: 10,
+                    }}
+                >
+                    <View
+                        style={{
+                            flexDirection: "row",
+                            alignItems: "center",
+                            justifyContent: "space-between",
+                        }}
+                    >
+                        <View>
+                            <Text
+                                style={{
+                                    fontSize: 16,
+                                    fontWeight: "bold",
+                                    color: "white",
+                                }}
+                            >
+                                {cart.length} items | {total}
+                            </Text>
+                            <Text
+                                style={{
+                                    fontSize: 14,
+                                    fontWeight: "500",
+                                    marginTop: 3,
+                                    color: "white",
+                                }}
+                            >
+                                Extra Charges may Apply!
+                            </Text>
+                        </View>
+
+                        <Pressable
+                            onPress={() =>
+                                navigation.navigate("Cart", {
+                                    name: route.params.name,
+                                })
+                            }
+                        >
+                            <Text
+                                style={{
+                                    fontSize: 18,
+                                    fontWeight: "600",
+                                    color: "white",
+                                }}
+                            >
+                                View Cart
+                            </Text>
+                        </Pressable>
+                    </View>
+                </Pressable>
+            )}
         </>
     );
 };
