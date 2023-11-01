@@ -242,7 +242,7 @@ const OrderScreen = () => {
                                         fontWeight: "600",
                                     }}
                                 >
-                                    please pay {"₹"}
+                                    please pay {"$"}
                                     {tip} to your delivery agent at the time of
                                     delivery
                                 </Text>
